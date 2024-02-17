@@ -55,9 +55,17 @@ void animateImage () {
     return;
   }
 
-  _movementTracker += 0.000035;
+  _movementTracker += (1.0/24.0);
 
-  if ((int)_movementTracker == 1) {
+  // NOTE: Removing the following printf
+  // causes the animation to be very fast.
+  // I assume that printf takes so long to run
+  // that it causes a noticable difference when
+  // call to printf is removed but this hypothesis
+  // needs to be verified.
+  printf("%lf\n", _movementTracker);
+
+  if (_movementTracker >= 1) {
     _movementTracker = 0.0;
 
     imageRect.x = imageRect.x + directionX * 1;
