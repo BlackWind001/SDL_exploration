@@ -28,6 +28,7 @@ int main (int argc, char* argv[]) {
   }
 
   loadImage();
+  logImageInfo();
 
   while(running) {
     while (SDL_PollEvent(&event)) {
@@ -37,6 +38,7 @@ int main (int argc, char* argv[]) {
           running = 0;
           break;
         }
+        case SDL_KEYUP: {}
       }
     }
   }

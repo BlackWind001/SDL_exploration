@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 void loadImage ();
+void logImageInfo ();
 
 extern SDL_Surface *image, *windowSurface;
 extern char *bmpFileName;
