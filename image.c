@@ -4,6 +4,10 @@
 char *bmpFileName = "assets/bmp_24.bmp";
 SDL_Surface *image, *windowSurface;
 SDL_Rect imageRect;
+bool shouldAnimateImage = false;
+int directionX = 1, directionY = 1;
+
+double _movementTracker = 0.0;
 
 void loadImage () {
   image = SDL_LoadBMP(bmpFileName);
@@ -43,4 +47,31 @@ void moveImageUp () {
 void moveImageDown () {
   imageRect.y = imageRect.y + 10;
   draw();
+}
+
+void animateImage () {
+
+  if (!shouldAnimateImage) {
+    return;
+  }
+
+  _movementTracker += 0.000035;
+
+  if ((int)_movementTracker == 1) {
+    _movementTracker = 0.0;
+
+    imageRect.x = imageRect.x + directionX * 1;
+    imageRect.y = imageRect.y + directionY * 1;
+
+    // Update direction for next draw
+    if ((imageRect.x + imageRect.w) == windowSurface->w || imageRect.x == 0) {
+      directionX = -directionX;
+    }
+
+    if ((imageRect.y + imageRect.h) == windowSurface->h || imageRect.y == 0) {
+      directionY = -directionY;
+    }
+
+    draw();
+  }
 }

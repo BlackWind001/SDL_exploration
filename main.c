@@ -29,11 +29,11 @@ int main (int argc, char* argv[]) {
 
   loadImage();
 
-  while(running) {
-    while (SDL_PollEvent(&event)) {
+  while(running) { // Game loop
+    while (SDL_PollEvent(&event)) { // Event loop
       switch (event.type) {
         case SDL_QUIT: {
-          printf("Quit event recognized");
+          printf("Quit event recognized.\n");
           running = 0;
           break;
         }
@@ -55,10 +55,16 @@ int main (int argc, char* argv[]) {
               moveImageDown();
               break;
             }
+            case SDLK_RETURN: {
+              shouldAnimateImage = !shouldAnimateImage;
+              break;
+            }
           }
         }
       }
     }
+
+    animateImage();
   }
 
 
