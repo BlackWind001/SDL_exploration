@@ -37,6 +37,26 @@ int main (int argc, char* argv[]) {
           running = 0;
           break;
         }
+        case SDL_KEYDOWN: {
+          switch (event.key.keysym.sym) {
+            case SDLK_RIGHT: {
+              moveImageRight();
+              break;
+            }
+            case SDLK_LEFT: {
+              moveImageLeft();
+              break;
+            }
+            case SDLK_UP: {
+              moveImageUp();
+              break;
+            }
+            case SDLK_DOWN: {
+              moveImageDown();
+              break;
+            }
+          }
+        }
       }
     }
   }

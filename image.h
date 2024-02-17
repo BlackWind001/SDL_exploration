@@ -6,6 +6,11 @@
 #include <stdio.h>
 
 void loadImage ();
+void moveImageRight ();
+void moveImageLeft ();
+void moveImageUp ();
+void moveImageDown ();
+void draw();
 
 extern SDL_Surface *image, *windowSurface;
 extern char *bmpFileName;
