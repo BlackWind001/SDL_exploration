@@ -8,6 +8,12 @@
 3. Open an MSYS2 MinGW64 shell.
 4. Run `./build.sh`
 
+# Additional info
+
+1. In `image.c`, there is a call to `printf` in the `animateImage` function which when removed causes
+   the animation to be extremely fast. This is weird and needs to be checked. Added the code as part
+   of the commit: [dc23a07](https://github.com/BlackWind001/SDL_exploration/commit/dc23a07136b77928e3eaec2ce5b289fdc96feb7e) . Previous implementation commit: [7c76807](https://github.com/BlackWind001/SDL_exploration/commit/7c7680781c70d3969abc53ce6e9c407832464ed9)
+
 # References
 
 1. [LibSDL docs](https://www.libsdl.org/release/SDL-1.2.15/docs/html/index.html)
