@@ -1,10 +1,9 @@
 #include "image.h"
 
+// ToDo: Make the following definition static and make the variable "character" as the single source
+// of truth.
 SDL_Surface *spritesheet_surface = NULL;
-struct spritesheet_data {
-  int rows, cols;
-  int single_sprite_w, single_sprite_h;
-} sp_data;
+SP_Data sp_data;
 
 SDL_Surface* loadSpritesheet(SDL_PixelFormat *desired_format) {
   SDL_Surface *raw_surface = NULL;
@@ -19,6 +18,9 @@ SDL_Surface* loadSpritesheet(SDL_PixelFormat *desired_format) {
   return spritesheet_surface;
 }
 
+// ToDo: Make SDL_Window *window a global variable accessible by all modules.
+// This will ensure that I do not have to keep passing it as an argument
+// everywhere.
 void initSpritesheet (int rows, int columns, SDL_Window *window) {
 
   SDL_Surface *window_surface = SDL_GetWindowSurface(window);
@@ -37,6 +39,9 @@ void initSpritesheet (int rows, int columns, SDL_Window *window) {
   drawSingleSprite(0,0, window);
 }
 
+// ToDo: The following function should not be called directly from
+// main.c. It should be character.c that should take up the entire
+// responsibility of drawing the sprite and other stuff.
 void drawSingleSprite (int row, int col, SDL_Window *window) {
   SDL_Surface* window_surface = SDL_GetWindowSurface(window);
   SDL_Rect current_sprite;

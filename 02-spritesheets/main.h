@@ -3,6 +3,9 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include <stdio.h>
+// ToDo: Once all the references to image related functions
+// are removed from main.c, the following include directive
+// should be removed.
 #include "image.h"
 
 #define DEFAULT_DIMENSION_WIDTH 720

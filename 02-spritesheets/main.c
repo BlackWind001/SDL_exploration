@@ -1,10 +1,15 @@
 #include "main.h"
 
+// ToDo: Put this in a global object called global
+// so that it can be clearly accessed across all modules.
 SDL_Window *window;
 
 int main(int argc, char *argv[]) {
   window = start();
   if (window != NULL){
+    // ToDo: Do not directly refer to image.c functions.
+    // Only character.c functions should be referenced from
+    // main.
     initSpritesheet(4, 9, window);
     loop();
   }
@@ -58,6 +63,8 @@ void loop () {
 }
 
 void end (SDL_Window* window) {
+  // ToDo: Cleanup for the spritesheet_surface should be left
+  // to character.c
   SDL_FreeSurface(spritesheet_surface);
   SDL_DestroyWindow(window);
   SDL_Quit();
