@@ -1,19 +1,15 @@
 #include "main.h"
 
-// ToDo: Put this in a global object called global
-// so that it can be clearly accessed across all modules.
-SDL_Window *window;
+Global global;
 
 int main(int argc, char *argv[]) {
-  window = start();
-  if (window != NULL){
-    // ToDo: Do not directly refer to image.c functions.
-    // Only character.c functions should be referenced from
-    // main.
-    initSpritesheet(4, 9, window);
+  global.window = start();
+  if (global.window != NULL){
+    global.window_surface = SDL_GetWindowSurface(global.window);
+    initCharacterFromSpriteSheet(4, 9);
     loop();
   }
-  end(window);
+  end(global.window);
   return 0;
 }
 
@@ -44,28 +40,29 @@ void loop () {
   SDL_Event event;
 
   while (game_is_running) { // Game loop
-    while (SDL_PollEvent(&event)) {
-      switch (event.type) {
-        case SDL_QUIT: {
-          game_is_running = 0;
+    SDL_PollEvent(&event);
+    if (event.type == SDL_KEYDOWN) {
+      switch(event.key.keysym.sym) {
+        case SDLK_RIGHT: {
+          moveCharacterForward();
           break;
         }
-        case SDL_KEYDOWN: {
-          switch(event.key.keysym.sym) {
-            case SDLK_RIGHT: {
-              // moveForward();
-            }
-          }
+        case SDLK_LEFT: {
+          moveCharacterBackward();
         }
       }
+    }
+    else if (event.type  == SDL_KEYUP) {
+      makeCharacterStill();
+    }
+    else if (event.type == SDL_QUIT) {
+      game_is_running = 0;
     }
   }
 }
 
 void end (SDL_Window* window) {
-  // ToDo: Cleanup for the spritesheet_surface should be left
-  // to character.c
-  SDL_FreeSurface(spritesheet_surface);
-  SDL_DestroyWindow(window);
+  cleanup();
+  SDL_DestroyWindow(global.window);
   SDL_Quit();
 }
